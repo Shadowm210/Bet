@@ -1,0 +1,48 @@
+def help():
+     print("")
+     print("h - вызов справочной информации обо всех файлах")
+     print("w - сохранить список его строк в файл")
+     print("l - вывести строки, которые пользователь уже добавил в память(list)")
+     print("r - прочитать строки из файла и вывести их на экран")
+     print("")
+
+ def save(file, lst):
+     for i in lst:
+         file.write(i + "\n")
+
+ def stroki(lst):
+     print(lst)
+
+ def read_file(file_name):
+     file = open(file_name + ".txt", "r", encoding="utf-8")
+     text = file.read()
+     lst_2 = text.split('\n')
+     file.close()
+     print("Файл прочитан!")
+     return lst_2
+
+
+ def main():
+     file_name = input("Введите имя вышего файла:   ")
+     file = open(file_name + ".txt", "w", encoding="utf-8")
+     file.close()
+     lst = []
+
+     while True:
+         komanda = input("Введите команду или запись. Справка h:   ")
+         if komanda.strip().lower() == "h":
+             help()
+         elif komanda.strip().lower() == "w":
+             save(file, lst)
+         elif komanda.strip().lower() == "l":
+             stroki(lst)
+         elif komanda.strip().lower() == "r":
+             print(read_file(file_name))
+         elif komanda.strip().lower() == "q":
+             save(file, lst)
+             exit()
+         else:
+             lst.append(komanda)
+
+
+ main()
